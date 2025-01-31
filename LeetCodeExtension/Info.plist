@@ -2,26 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionAttributes</key>
-		<dict>
-			<key>XCSourceEditorCommandDefinitions</key>
-			<array>
-				<dict>
-					<key>XCSourceEditorCommandClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
-					<key>XCSourceEditorCommandIdentifier</key>
-					<string>$(PRODUCT_BUNDLE_IDENTIFIER).SourceEditorCommand</string>
-					<key>XCSourceEditorCommandName</key>
-					<string>Source Editor Command</string>
-				</dict>
-			</array>
-			<key>XCSourceEditorExtensionPrincipalClass</key>
-			<string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>
-		</dict>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.dt.Xcode.extension.source-editor</string>
-	</dict>
+    <key>NSExtension</key>
+    <dict>
+        <key>NSExtensionAttributes</key>
+        <dict>
+            <key>XCSourceEditorCommandDefinitions</key>
+            <array>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>Fetch LeetCode Problem</string>
+                </dict>
+            </array>
+            <key>XCSourceEditorExtensionPrincipalClass</key>
+            <string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>
+            <key>NSBonjourServices</key>
+            <array>
+                <string>_leetcode._tcp</string>
+            </array>
+        </dict>
+        <key>NSExtensionPointIdentifier</key>
+        <string>com.apple.dt.Xcode.extension.source-editor</string>
+    </dict>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    <key>com.apple.security.network.client</key>
+    <true/>
 </dict>
 </plist>

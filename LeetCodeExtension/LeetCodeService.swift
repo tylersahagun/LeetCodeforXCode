@@ -10,7 +10,6 @@ class LeetCodeService {
             return
         }
         
-        // First, get the CSRF token
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
@@ -101,6 +100,42 @@ class LeetCodeService {
                    let data = json["data"] as? [String: Any],
                    let question = data["question"] as? [String: Any] {
                     completion(.success(question))
+                } else {
+                    completion(.failure(NSError(domain: "Invalid response format", code: 0, userInfo: nil)))
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    func fetchRandomProblem(completion: @escaping (Result<[String: Any], Error>) -> Void) {
+        guard let url = URL(string: "https://leetcode.com/api/problems/all/") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
+                return
+            }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let statStatusPairs = json["stat_status_pairs"] as? [[String: Any]] {
+                    let randomProblem = statStatusPairs.randomElement()
+                    if let stat = randomProblem?["stat"] as? [String: Any],
+                       let titleSlug = stat["question__title_slug"] as? String {
+                        self.fetchProblem(titleSlug: titleSlug, completion: completion)
+                    } else {
+                        completion(.failure(NSError(domain: "Invalid problem data", code: 0, userInfo: nil)))
+                    }
                 } else {
                     completion(.failure(NSError(domain: "Invalid response format", code: 0, userInfo: nil)))
                 }

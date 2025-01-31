@@ -1,0 +1,24 @@
+{
+  "originHash" : "42845ecf95612b59c6e97491fa31c6abdf21af96d4c1ca198206b7c611e5ce73",
+  "pins" : [
+    {
+      "identity" : "swifthtmltomarkdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ActuallyTaylor/SwiftHTMLToMarkdown.git",
+      "state" : {
+        "revision" : "d533b9cb47a8defaa8d9432fad20ecf5964c0668",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup.git",
+      "state" : {
+        "revision" : "6b4930da67b462d3f200472c902dd016d37a554d",
+        "version" : "2.7.7"
+      }
+    }
+  ],
+  "version" : 3
+}
